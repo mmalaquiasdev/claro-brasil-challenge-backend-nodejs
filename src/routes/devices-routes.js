@@ -42,6 +42,7 @@ const handlerFindOne = (req, res) => {
 }
 
 const handlerCreate = (req, res) => {
+  console.log(`req: ${req}`)
   return getDeviceDatabaseModel(req)
     .create(req.body)
     .then(data => {

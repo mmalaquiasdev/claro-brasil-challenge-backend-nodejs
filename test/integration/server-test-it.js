@@ -92,6 +92,24 @@ describe('Routes of Devices', () => {
     })
   })
 
+  describe('Route PATCH /users/{user_id}/devices/{id}', () => {
+    let newNameIosDevice = defaultIosDevice;
+    newNameIosDevice.name = 'IPHONE 7'
+
+    it('Should update the name of the device and STATUS CODE 200 OK', (done) => {
+      request
+        .patch(`/users/${newDevice.user_id}/devices/${newNameIosDevice.id}`)
+        .send(newNameIosDevice)
+        .end((err, res) => {
+          expect(res.status).to.be.eql(200)
+
+          expect(res.body.name).to.be.eql(newNameIosDevice.name)
+
+          done(err)
+        })
+    })
+  })
+
   // after((done) => {
   //   Device
   //     .destroy({where: {}})
