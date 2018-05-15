@@ -1,0 +1,33 @@
+{
+  "name": "claro-brasil-challenge-backend-nodejs",
+  "version": "1.0.0",
+  "description": "Claro Brasil Challenge - Node JS ===================",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmalaquiasdev/claro-brasil-challenge-backend-nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmalaquiasdev/claro-brasil-challenge-backend-nodejs/issues"
+  },
+  "homepage": "https://github.com/mmalaquiasdev/claro-brasil-challenge-backend-nodejs#readme",
+  "dependencies": {
+    "restify": "^7.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "nodemon": "^1.17.4"
+  }
+}
