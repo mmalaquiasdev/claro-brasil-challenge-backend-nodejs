@@ -1,3 +1,6 @@
+# SQLITE database
+dev.sqlite
+
 # Logs
 logs
 *.log
