@@ -41,9 +41,25 @@ const handlerFindOne = (req, res) => {
     })
 }
 
+const handlerCreate = (req, res) => {
+  return getDeviceDatabaseModel(req)
+    .create(req.body)
+    .then(data => {
+      res.status(201)
+      return res.json(data)
+    })
+    .catch(err => {
+      res.status(412)
+      res.send(err)
+
+      return res
+    })
+}
+
 const getDeviceDatabaseModel = (req) => req.$database.models.Device
 
 module.exports = {
   devicesHandlerFindAll: handlerFindAll,
-  devicesHandlerFindOne: handlerFindOne
+  devicesHandlerFindOne: handlerFindOne,
+  devicesHandlerCreate: handlerCreate
 }

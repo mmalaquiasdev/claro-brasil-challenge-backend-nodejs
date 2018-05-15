@@ -1,4 +1,4 @@
-const {defaultIosDevice, defaultAndroidDevice} = require('./mocks')
+const {defaultIosDevice, defaultAndroidDevice, newDevice} = require('./mocks')
 
 describe('Routes of Devices', () => {
   const Device = server.$database.models.Device
@@ -69,6 +69,23 @@ describe('Routes of Devices', () => {
         .get('/users/1/devices/666')
         .end((err, res) => {
           expect(res.status).to.be.eql(404)
+
+          done(err)
+        })
+    })
+  })
+
+  describe('Route POST /users/{user_id}/devices', () => {
+    it('Should create a device and STATUS CODE 201 CREATED', (done) => {
+      request
+        .post(`/users/${newDevice.user_id}/devices`)
+        .send(newDevice)
+        .end((err, res) => {
+          expect(res.status).to.be.eql(201)
+
+          expect(res.body.user_id).to.be.eql(newDevice.user_id)
+          expect(res.body.name).to.be.eql(newDevice.name)
+          expect(res.body.model).to.be.eql(newDevice.model)
 
           done(err)
         })
