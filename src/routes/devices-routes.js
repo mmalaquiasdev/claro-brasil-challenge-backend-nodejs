@@ -1,18 +1,14 @@
 const handlerFindAll = (req, res) => {
-  return res.send([
-    {
-      id: 219412,
-      user_id: 1,
-      name: 'IPHONE SE (GSM)',
-      model: 'IOS'
-    },
-    {
-      id: 554131,
-      user_id: 1,
-      name: 'SM-G920F',
-      model: 'ANDROID'
-    }
-  ])
+  const Device = req.$database.models.Device
+
+  return Device.findAll({})
+    .then(data => res.json(data))
+    .catch(err => {
+      res.status(412)
+      res.send(err)
+
+      return res
+    })
 }
 
 module.exports = {

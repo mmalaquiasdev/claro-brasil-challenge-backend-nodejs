@@ -1,6 +1,18 @@
 const {defaultIosDevice, defaultAndroidDevice} = require('./mocks')
 
 describe('Routes of Devices', () => {
+  const Device = server.$database.models.Device
+
+  beforeEach((done) => {
+    Device
+      .destroy({where: {}})
+      .then(() => {
+        Device.create(defaultIosDevice)
+        Device.create(defaultAndroidDevice)
+      })
+      .then(() => done())
+  })
+
   describe('Route GET /users/{id}/devices', () => {
     it('Should return a list of books and STATUS CODE 200 OK', (done) => {
       request
@@ -17,5 +29,11 @@ describe('Routes of Devices', () => {
           done(err)
         })
     })
+  })
+
+  after((done) => {
+    Device
+      .destroy({where: {}})
+      .then(() => done())
   })
 })
