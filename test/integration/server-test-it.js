@@ -93,12 +93,12 @@ describe('Routes of Devices', () => {
   })
 
   describe('Route PATCH /users/{user_id}/devices/{id}', () => {
-    let newNameIosDevice = defaultIosDevice;
+    let newNameIosDevice = defaultIosDevice
     newNameIosDevice.name = 'IPHONE 7'
 
     it('Should update the name of the device and STATUS CODE 200 OK', (done) => {
       request
-        .patch(`/users/${newDevice.user_id}/devices/${newNameIosDevice.id}`)
+        .patch(`/users/${newNameIosDevice.user_id}/devices/${newNameIosDevice.id}`)
         .send(newNameIosDevice)
         .end((err, res) => {
           expect(res.status).to.be.eql(200)
@@ -110,9 +110,21 @@ describe('Routes of Devices', () => {
     })
   })
 
-  // after((done) => {
-  //   Device
-  //     .destroy({where: {}})
-  //     .then(() => done())
-  // })
+  describe('Route DELETE /users/{user_id}/devices/{id}', () => {
+    it('Should delete a device and STATUS CODE 204 NO CONTENT', (done) => {
+      request
+        .delete(`/users/${defaultAndroidDevice.user_id}/devices/${defaultAndroidDevice.id}`)
+        .end((err, res) => {
+          expect(res.status).to.be.eql(204)
+
+          done(err)
+        })
+    })
+  })
+
+  after((done) => {
+    Device
+      .destroy({where: {}})
+      .then(() => done())
+  })
 })

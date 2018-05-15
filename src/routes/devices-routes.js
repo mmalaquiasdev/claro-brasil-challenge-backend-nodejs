@@ -1,11 +1,10 @@
 const handlerFindAll = (req, res) => {
-  const Device = getDeviceDatabaseModel(req)
-
-  return Device.findAll({
-    where: {
-      user_id: req.params.user_id
-    }
-  })
+  return getDeviceDatabaseModel(req)
+    .findAll({
+      where: {
+        user_id: req.params.user_id
+      }
+    })
     .then(data => {
       if (!data.length) res.status(204)
 
@@ -13,21 +12,18 @@ const handlerFindAll = (req, res) => {
     })
     .catch(err => {
       res.status(412)
-      res.send(err)
-
-      return res
+      return res.send(err)
     })
 }
 
 const handlerFindOne = (req, res) => {
-  const Device = getDeviceDatabaseModel(req)
-
-  return Device.findOne({
-    where: {
-      user_id: req.params.user_id,
-      id: req.params.id
-    }
-  })
+  return getDeviceDatabaseModel(req)
+    .findOne({
+      where: {
+        user_id: req.params.user_id,
+        id: req.params.id
+      }
+    })
     .then(data => {
       if (!data) res.status(404)
 
@@ -35,14 +31,11 @@ const handlerFindOne = (req, res) => {
     })
     .catch(err => {
       res.status(412)
-      res.send(err)
-
-      return res
+      return res.send(err)
     })
 }
 
 const handlerCreate = (req, res) => {
-  console.log(`req: ${req}`)
   return getDeviceDatabaseModel(req)
     .create(req.body)
     .then(data => {
@@ -51,9 +44,39 @@ const handlerCreate = (req, res) => {
     })
     .catch(err => {
       res.status(412)
-      res.send(err)
+      return res.send(err)
+    })
+}
 
-      return res
+const handlerUpdateName = (req, res) => {
+  const name = req.body.name
+
+  return getDeviceDatabaseModel(req)
+    .update({ name }, {
+      where: {
+        user_id: req.params.user_id,
+        id: req.params.id
+      }
+    })
+    .then(() => handlerFindOne(req, res))
+    .catch(err => {
+      res.status(412)
+      return res.send(err)
+    })
+}
+
+const handlerDelete = (req, res) => {
+  return getDeviceDatabaseModel(req)
+    .destroy({
+      where: {
+        user_id: req.params.user_id,
+        id: req.params.id
+      }
+    })
+    .then(() => res.json(204))
+    .catch(err => {
+      res.status(412)
+      return res.send(err)
     })
 }
 
@@ -62,5 +85,7 @@ const getDeviceDatabaseModel = (req) => req.$database.models.Device
 module.exports = {
   devicesHandlerFindAll: handlerFindAll,
   devicesHandlerFindOne: handlerFindOne,
-  devicesHandlerCreate: handlerCreate
+  devicesHandlerCreate: handlerCreate,
+  devicesHandlerUpdateName: handlerUpdateName,
+  devicesHandlerDelete: handlerDelete
 }
