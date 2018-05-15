@@ -1,4 +1,5 @@
 Claro Brasil Challenge - Node JS
+[![Build Status](https://travis-ci.org/mmalaquiasdev/claro-brasil-challenge-backend-nodejs.svg?branch=master)](https://travis-ci.org/mmalaquiasdev/claro-brasil-challenge-backend-nodejs) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 ===================
 
 O objetivo deste desafio é avaliar a competência técnica dos candidatos a desenvolvedor NodeJS na **Claro Brasil**. Será solicitado o desenvolvimento de uma API restful para fazer o Controle de Devices cadastrados no sistema. As regras deste Controle de Devices está detalhada neste documento.
