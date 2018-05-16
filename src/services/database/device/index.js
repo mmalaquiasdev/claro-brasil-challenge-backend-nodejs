@@ -1,5 +1,5 @@
 const deviceFactory = (db) => ({
-  findAll: () => findAll(db),
+  findAll: (params) => findAll(db, params),
   findOne: (params) => findOne(db, params),
   count: () => {},
   create: (body) => create(db, body),
@@ -7,8 +7,13 @@ const deviceFactory = (db) => ({
   del: (params) => del(db, params)
 })
 
-const findAll = (db) => {
-  return db.select().table('device')
+const findAll = (db, params) => {
+  return db
+    .select()
+    .table('device')
+    .where({
+      user_id: params.user_id
+    })
 }
 
 const findOne = (db, params) => {

@@ -24,8 +24,11 @@ test.beforeEach((t) => db('device').truncate())
 test.after.always((t) => db('device').truncate())
 
 test('Should create a device', async (t) => {
+  const params = { user_id: 1 }
+
   await createOneDevice()
-  const array = await devices.findAll()
+
+  const array = await devices.findAll(params)
   const newDevice = array[0]
 
   t.is(newDevice.name, 'IPHONE 1')
@@ -33,6 +36,8 @@ test('Should create a device', async (t) => {
 })
 
 test('Should create a device with uppercase data', async (t) => {
+  const params = { user_id: 2 }
+
   await devices
     .create({
       user_id: 2,
@@ -40,7 +45,7 @@ test('Should create a device with uppercase data', async (t) => {
       model: 'android'
     })
 
-  const array = await devices.findAll()
+  const array = await devices.findAll(params)
   const newDevice = array[0]
 
   t.is(newDevice.name, 'SAMSUNG GALAXY A5')
@@ -77,11 +82,13 @@ test('Should delete a device', async (t) => {
 test('Should return a list of device', async (t) => {
   const length = 3
 
+  const params = { user_id: 1 }
+
   await createOneDevice()
   await createOneDevice()
   await createOneDevice()
 
-  const array = await devices.findAll()
+  const array = await devices.findAll(params)
 
   t.is(array.length, length)
 })

@@ -3,7 +3,7 @@ const db = require('../services/database')
 const routes = (server) => {
   server.get('/users/:user_id/devices', async (req, res) => {
     try {
-      const devices = await db.device().findAll()
+      const devices = await db.device().findAll(req.params)
       return res.send(devices)
     } catch (error) {
       console.error(error)
