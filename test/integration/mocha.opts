@@ -1,3 +1,0 @@
---require test/integration/init-test-it.js
---reporter spec
---slow 5000
