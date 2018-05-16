@@ -22,9 +22,12 @@ const findOne = (db, params) => {
 }
 
 const create = (db, body) => {
-  return db
-    .into('device')
-    .insert(body)
+  return db('device')
+    .insert({
+      user_id: body.user_id,
+      name: body.name.toUpperCase(),
+      model: body.model.toUpperCase()
+    })
     .then((newId) => {
       const params = {
         device_id: newId,
@@ -38,7 +41,7 @@ const create = (db, body) => {
 const update = (db, params, body) => {
   return db('device')
     .update({
-      name: body.name
+      name: body.name.toUpperCase()
     })
     .where({
       id: params.device_id,

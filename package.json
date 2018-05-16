@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "npm run test-integration",
-    "test-integration": ""
+    "test": "ava --verbose"
   },
   "repository": {
     "type": "git",
@@ -29,6 +28,7 @@
     "restify-cors-middleware": "^1.1.0"
   },
   "devDependencies": {
+    "ava": "^0.25.0",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.11.0",
