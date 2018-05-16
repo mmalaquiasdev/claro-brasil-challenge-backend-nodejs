@@ -1,7 +1,7 @@
 const deviceFactory = (db) => ({
   findAll: (params) => findAll(db, params),
   findOne: (params) => findOne(db, params),
-  count: () => {},
+  count: (params) => count(db, params),
   create: (body) => create(db, body),
   update: (params, body) => update(db, params, body),
   del: (params) => del(db, params)
@@ -24,6 +24,14 @@ const findOne = (db, params) => {
       id: params.device_id,
       user_id: params.user_id
     })
+}
+
+const count = (db, params) => {
+  return db('device')
+    .first()
+    .count('id AS count')
+    .where('user_id', '=', params.user_id)
+    .then((data) => data.count)
 }
 
 const create = (db, body) => {

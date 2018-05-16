@@ -1,4 +1,4 @@
-DROP SCHEMA IF EXISTS claro_brasil_nodejs_test;
+DROP SCHEMA IF EXISTS claro_brasil_nodejs;
 
 CREATE SCHEMA claro_brasil_nodejs;
 

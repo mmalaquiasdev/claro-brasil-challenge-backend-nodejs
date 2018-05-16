@@ -1,9 +1,10 @@
 const db = require('../services/database')
+const service = require('../services')
 
 const routes = (server) => {
   server.get('/users/:user_id/devices', async (req, res) => {
     try {
-      const devices = await db.device().findAll(req.params)
+      const devices = await service.findAll(req)
       return res.send(devices)
     } catch (error) {
       console.error(error)
@@ -13,7 +14,7 @@ const routes = (server) => {
 
   server.get('/users/:user_id/devices/:device_id', async (req, res) => {
     try {
-      const device = await db.device().findOne(req.params)
+      const device = await service.findOne(req)
       return res.send(device)
     } catch (error) {
       console.error(error)
@@ -23,17 +24,16 @@ const routes = (server) => {
 
   server.post('/users/:user_id/devices', async (req, res) => {
     try {
-      const newDevice = await db.device().create(req.body)
+      const newDevice = await service.create(req)
       return res.send(newDevice)
     } catch (error) {
-      console.error(error)
       return res.send(error)
     }
   })
 
   server.patch('/users/:user_id/devices/:device_id', async (req, res) => {
     try {
-      const updatedDevice = await db.device().update(req.params, req.body)
+      const updatedDevice = await service.update(req)
       return res.send(updatedDevice)
     } catch (error) {
       console.error(error)
@@ -43,7 +43,7 @@ const routes = (server) => {
 
   server.del('/users/:user_id/devices/:device_id', async (req, res) => {
     try {
-      await db.device().del(req.params)
+      await service.destroy(req)
       res.status(204)
       return res.send()
     } catch (error) {
