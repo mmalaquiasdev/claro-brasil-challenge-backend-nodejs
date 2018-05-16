@@ -1,17 +1,5 @@
 const test = require('ava')
-
-require('dotenv').config()
-
-const db = require('knex')({
-  client: process.env.DATABASE_CLIENT,
-  connection: {
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_SCHEMA_TEST
-  }
-})
-
+const {db} = require('../../../setup')
 const devices = require('../../../../../src/services/database/device')(db)
 
 test('Should create a device', async (t) => {
