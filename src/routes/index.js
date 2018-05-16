@@ -1,4 +1,3 @@
-const db = require('../services/database')
 const service = require('../services')
 
 const routes = (server) => {
