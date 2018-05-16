@@ -15,6 +15,7 @@ const db = require('knex')({
 const devices = require('../../../../../src/services/database/device')(db)
 
 test.beforeEach((t) => db('device').truncate())
+test.after.always((t) => db('device').truncate())
 
 test('Should create a device', async (t) => {
   const newDevice = await devices
