@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/mmalaquiasdev/claro-brasil-challenge-backend-nodejs#readme",
   "dependencies": {
+    "dotenv": "^5.0.1",
     "knex": "^0.14.6",
     "mysql": "^2.15.0",
     "pg": "^7.4.3",

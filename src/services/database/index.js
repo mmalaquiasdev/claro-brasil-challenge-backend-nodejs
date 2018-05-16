@@ -1,10 +1,10 @@
 const db = require('knex')({
-  client: 'mysql',
+  client: process.env.DATABASE_CLIENT,
   connection: {
-    host: '127.0.0.1',
-    user: 'root',
-    password: 'root',
-    database: 'claro_brasil_nodejs'
+    host: process.env.DATABASE_HOST,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE_SCHEMA
   }
 })
 
