@@ -1,13 +1,8 @@
-const {database} = require('../config')
-const dbFactory = require('./database')
-
-const db = dbFactory(database.getConnection(process.env.NODE_ENV))
-
 const errors = require('restify-errors')
 
 const findAll = async (req) => {
   try {
-    const devices = await db.device.findAll(req.params)
+    const devices = await req.$db.device.findAll(req.params)
     return devices
   } catch (error) {
     console.error(error)
@@ -17,7 +12,7 @@ const findAll = async (req) => {
 
 const findOne = async (req) => {
   try {
-    const device = await db.device.findOne(req.params)
+    const device = await req.$db.device.findOne(req.params)
     if (!device) throw new errors.NotFoundError('Device not found')
     return device
   } catch (error) {
@@ -27,9 +22,9 @@ const findOne = async (req) => {
 
 const create = async (req) => {
   try {
-    await verifyDeviceLimitExceeded(db, req)
+    await verifyDeviceLimitExceeded(req.$db, req)
     req.body.user_id = req.params.user_id
-    const newDevice = await db.device.create(req.body)
+    const newDevice = await req.$db.device.create(req.body)
     return newDevice
   } catch (error) {
     throw error
@@ -38,8 +33,8 @@ const create = async (req) => {
 
 const destroy = async (req) => {
   try {
-    await verifyMinialDeviceLimitExceeded(db, req)
-    const affectRow = await db.device.del(req.params)
+    await verifyMinialDeviceLimitExceeded(req.$db, req)
+    const affectRow = await req.$db.device.del(req.params)
 
     if (affectRow === 0) throw new errors.NotFoundError('Device not found')
 
@@ -51,7 +46,7 @@ const destroy = async (req) => {
 
 const update = async (req) => {
   try {
-    const updatedDevice = await db.device.update(req.params, req.body)
+    const updatedDevice = await req.$db.device.update(req.params, req.body)
     return updatedDevice
   } catch (error) {
     console.error(error)
