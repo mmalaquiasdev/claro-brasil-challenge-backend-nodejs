@@ -15,7 +15,6 @@ const findAll = async (req) => {
 const findOne = async (req) => {
   try {
     const device = await db.device().findOne(req.params)
-    console.log(device)
     if (!device) throw new errors.NotFoundError('Device not found')
     return device
   } catch (error) {
@@ -61,19 +60,13 @@ const verifyDeviceLimitExceeded = async (db, req) => {
   const DEVICE_LIMIT = 3
   try {
     const devices = await findAll(req)
-
     if (devices.length >= DEVICE_LIMIT) {
-      devices
-        .forEach((device) => {
-          if (!userCanModifyDevices(device.update_at)) {
-            throw new errors.PreconditionFailedError('Device limit exceeded, user has 3 devices registered')
-          }
-        })
-
-      throw new errors.PreconditionFailedError('Device limit exceeded, user has 3 registered. Please remove one device to subscribe a new one')
+      const filtredDevices = devices.filter(device => userCanModifyDevices(device.update_at))
+      if (filtredDevices.length !== 0) {
+        throw new errors.PreconditionFailedError('Device limit exceeded, user has 3 registered. Please remove one device to subscribe a new one')
+      }
+      throw new errors.PreconditionFailedError('Device limit exceeded, user has 3 devices registered')
     }
-
-    return devices.length
   } catch (error) {
     throw error
   }
@@ -92,7 +85,7 @@ const verifyMinialDeviceLimitExceeded = async (db, req) => {
   }
 }
 
-const userCanModifyDevices = async (lastChangeDate) => {
+const userCanModifyDevices = (lastChangeDate) => {
   const PERIOD_DAYS_BLOCK = 30
   const lastDate = new Date(lastChangeDate)
   const actualDate = new Date()
