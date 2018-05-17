@@ -1,14 +1,9 @@
 const test = require('ava')
+const {database} = require('../../../../../src/config')
 
 require('dotenv').config()
 
-const db = require('knex')({
-  client: 'sqlite3',
-  connection: {
-    filename: './devices-db.sqlite'
-  }
-})
-
+const db = database.getConnection(process.env.NODE_ENV)
 const devices = require('../../../../../src/services/database/device')(db)
 
 const createOneDevice = () => {

@@ -4,9 +4,9 @@
   "description": "Claro Brasil Challenge - Node JS ===================",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "test": "npm run test-coverage",
+    "start": "NODE_ENV=development node src/index.js",
+    "dev": "NODE_ENV=development nodemon src/index.js",
+    "test": "NODE_ENV=test npm run test-coverage",
     "test-unit": "ava -s -v",
     "test-coverage": "nyc --reporter=html --reporter=text npm run test-unit"
   },
