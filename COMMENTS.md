@@ -46,6 +46,7 @@ A função dessa lib é criar uma conexão entre essa base de dados para o knex
 1. Teria feito mais testes
 2. Integrado o projeto com um banco relacional mais parrudo no Heroku, provavelmente o postgres
 3. Criado um estrutura para checar logs
-4. Autenticação dos usuários
-5. Cache descentralizado usando um redis ou dynamodb
-6. Ativado o PM2 para ter um process manager em um ambiente node produtivo
+4. Teria removido a lib restify-errors e usado a Boom por permitir que eu altere o body de response, assim eu iria conseguir enviar a Data para o usuário
+5. Autenticação dos usuários
+6. Cache descentralizado usando um redis ou dynamodb
+7. Ativado o PM2 para ter um process manager em um ambiente node produtivo
