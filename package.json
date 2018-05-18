@@ -4,7 +4,7 @@
   "description": "Claro Brasil Challenge - Node JS ===================",
   "main": "src/index.js",
   "scripts": {
-    "start": "NODE_ENV=development node src/index.js",
+    "start": "npm run dev",
     "dev": "NODE_ENV=development nodemon src/index.js",
     "test": "NODE_ENV=test npm run test-coverage",
     "test-unit": "ava -s -v",
@@ -24,8 +24,6 @@
   "dependencies": {
     "dotenv": "^5.0.1",
     "knex": "^0.14.6",
-    "mysql": "^2.15.0",
-    "pg": "^7.4.3",
     "restify": "^7.1.1",
     "restify-cors-middleware": "^1.1.0",
     "restify-errors": "^6.0.0"
